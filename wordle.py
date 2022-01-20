@@ -1,3 +1,7 @@
+import random
+import string
+
+
 def find_all(string, char):
     """Find all indicies of char in string."""
     return [i for i, letter in enumerate(string) if letter == char]
