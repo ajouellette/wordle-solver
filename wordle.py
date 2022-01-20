@@ -59,16 +59,23 @@ def main():
     print(len(word_list), "possible options")
 
     for i in range(6):
-        guess = input("Tried guess: ")
-        grade = input("Grade for guess: ")
-
-        assert len(guess) == 5 and len(grade) == 5
+        while True:
+            guess = input("Tried guess: ")
+            grade = input("Grade for guess: ")
+            if len(guess) != 5 or len(grade) != 5:
+                print("The guess and it's score must be 5 letters long.")
+                continue
+            if not set(grade).issubset(set("gyb")):
+                print("The score can only contain the letters g, y, or b.")
+                continue
+            break
 
         word_list = filter_word_list(word_list, guess, grade)
 
         print(len(word_list), "possible next guesses")
-        print("10 random possible next guesses:")
-        print(random.sample(word_list, 10))
+        print("random possible next guesses:")
+        num = min(len(word_list), 10)
+        print(random.sample(word_list, num))
 
 
 if __name__ == "__main__":
