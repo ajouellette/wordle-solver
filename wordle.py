@@ -55,7 +55,7 @@ def main():
         word_list = file.read().splitlines()
 
     guess = get_intial_guess(word_list)
-    print("Initial guess:", guess)
+    print("Initial guess suggestion:", guess)
     print(len(word_list), "possible options")
 
     for i in range(6):
@@ -66,8 +66,9 @@ def main():
 
         word_list = filter_word_list(word_list, guess, grade)
 
-        print(len(word_list))
-        print(word_list[:10])
+        print(len(word_list), "possible next guesses")
+        print("10 random possible next guesses:")
+        print(random.sample(word_list, 10))
 
 
 if __name__ == "__main__":
