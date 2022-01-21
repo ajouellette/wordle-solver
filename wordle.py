@@ -78,8 +78,16 @@ def main():
 
         word_list = filter_word_list(word_list, guess, grade)
 
+        if len(word_list) == 1:
+            print("Found solution:", word_list[0])
+            break
+        elif len(word_list) == 0:
+            print("Could not find a solution. Possibly missing word in input list.")
+            break
+
         print(len(word_list), "possible next guesses")
-        print("random possible next guesses:")
+        if len(word_list) > 10:
+            print("random possible next guesses:")
         num = min(len(word_list), 10)
         print(random.sample(word_list, num))
 
