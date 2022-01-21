@@ -8,18 +8,22 @@ def find_all(string, char):
 
 
 def get_intial_guess(words):
-    """Generate a reasonable first guess from a list of words."""
+    """Generate a reasonable first guess from a list of words.
+
+    Word must have all unique letters, 3 most common vowels, and most common
+    consonant.
+    """
     while True:
         i = random.randrange(len(words))
         if len(words[i]) != len(set(words[i])):
             continue
         if 'e' not in words[i]:
             continue
-        if 'o' not in words[i]:
+        if 'i' not in words[i]:
+            continue
+        if 'a' not in words[i]:
             continue
         if 'r' not in words[i]:
-            continue
-        if 't' not in words[i]:
             continue
         return words[i]
 
@@ -54,7 +58,9 @@ def main():
     with open("five_letter_words", 'r') as file:
         word_list = file.read().splitlines()
 
-    guess = get_intial_guess(word_list)
+    #guess = get_intial_guess(word_list)
+    # probably better just to use "irate" as initial guess
+    guess = "irate"
     print("Initial guess suggestion:", guess)
     print(len(word_list), "possible options")
 
