@@ -28,6 +28,19 @@ def get_intial_guess(words):
         return words[i]
 
 
+def score_guess(guess):
+    """Score guess to sort list of potential guesses."""
+    score = 0
+    # 10 points for all unique letters
+    if len(set(guess)) == len(guess):
+        score += 10
+    # score based on presence of frequent letters
+    letters = "eariotnslcudpmhgbfywkvxzjq"
+    for letter in guess:
+        score += (26 - letters.index(letter)) / 10
+    return score
+
+
 def is_valid(word, guess, grade):
     """Check if a word is a valid next guess based on previous guess."""
     for i, letter in enumerate(guess):
@@ -55,7 +68,9 @@ def filter_word_list(words, guess, grade):
 
 
 def main():
-    with open("five_letter_words", 'r') as file:
+    #word_file = "5-letter-words.txt"
+    word_file = "five_letter_words"
+    with open(word_file, 'r') as file:
         word_list = file.read().splitlines()
 
     #guess = get_intial_guess(word_list)
@@ -85,11 +100,9 @@ def main():
             print("Could not find a solution. Possibly missing word in input list.")
             break
 
+        word_list.sort(key=score_guess, reverse=True)
         print(len(word_list), "possible next guesses")
-        if len(word_list) > 10:
-            print("random possible next guesses:")
-        num = min(len(word_list), 10)
-        print(random.sample(word_list, num))
+        print(word_list[:12])
 
 
 if __name__ == "__main__":
